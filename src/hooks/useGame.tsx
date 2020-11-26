@@ -116,6 +116,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
     console.log(111111111111)
     console.log(draft.score)
     console.log(rawData1["id"])
+    console.log(rawData1["id"]["score"])
     console.log(111111111111)
 
     if(draft.score>rawData1["id"]["score"])
