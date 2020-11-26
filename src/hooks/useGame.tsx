@@ -22,12 +22,14 @@ const initialState: InitialStateInterFace = {
   difficulty : "easy",
   id: undefined,
 }
+function sleep(delay: number) {
+  for(var t = Date.now(); Date.now() - t <= delay;);
+}
 
 async function nicknameIsContain(url : string)
 {
   const req = await axios.get(url)
   .then(response=> (
-
 
     localStorage.setItem(
       "ID",
@@ -36,22 +38,41 @@ async function nicknameIsContain(url : string)
         id: response.data
       })
     ),
-    console.log(response.data)
+    console.log(688688),
+    console.log(response.data),
+    console.log(688688)
 
   ));
+  console.log(688688)
+}
+
+async function registerNickname(nickname : string,score :number)
+{
+  var jsons={  
+    nickname:nickname,
+    score:score
+    }
+
+    const req =  await axios.post("http://47.101.139.249/api/players",jsons).then(response=> (
+      localStorage.setItem(
+        "ID",
+        JSON.stringify({
+          id: response.data
+        })
+      ),
+      console.log(444),
+      console.log(response),
+      console.log(444)
+    ));
 
 }
 
 function reducer(draft: typeof initialState, action: ACTIONTYPE) {
   const {nickname} = getStoredPlayer()
-  debugger
-
-
 
   switch(action.type) {
     case 'START_SINGLEPLAYER':
       draft.gameType = 'singleplayer'
-      const storageData = getStoredBoard()
       
       /*if (storageData.board && storageData.score) {
         draft.board = storageData.board
@@ -65,7 +86,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
       draft.isPlaying = true
       storeBoard({board: draft.board, score: draft.score})
 
-      var url = "http://47.101.139.249:3000/api/players/"
+      var url = "http://47.101.139.249/api/players/"
       url = url + nickname
 
       console.log(url)
@@ -79,24 +100,39 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
 
 
       nicknameIsContain(url);
+      console.log(7777)
       const rawData = JSON.parse(localStorage.getItem("ID") as string)
+      console.log(rawData)
       console.log(rawData['id'])
+      
 
       if(rawData['id']==null)
       {
-        var jsons={  
-          nickname:nickname,
-          score:draft.score
-          }
-  
-          axios.post("http://47.101.139.249:3000/api/players",jsons).then(response=> (
-            localStorage.setItem(
-              "ID",
-              JSON.stringify({
-                id: response.data
-              })
-            )
-          ));
+        console.log(999)
+        registerNickname(nickname as string,draft.score)
+        console.log(999)
+
+      }
+
+      const rawData2 = JSON.parse(localStorage.getItem("ID") as string)
+
+
+      console.log(rawData2)
+
+
+      sleep(1000)
+      const initResult1 = initializeBoard(4)
+      draft.board = initResult1.board
+      draft.isPlaying = true
+      storeBoard({board: draft.board, score: draft.score})
+
+      nicknameIsContain(url);
+      if(rawData['id']==null)
+      {
+        console.log(999)
+        registerNickname(nickname as string,draft.score)
+        console.log(999)
+
       }
 
 
@@ -123,6 +159,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
 
     
     const rawData1 = JSON.parse(localStorage.getItem("ID") as string)
+    //debugger
     console.log(111111111111)
     console.log(draft.score)
     console.log(rawData1["id"])
@@ -136,7 +173,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
         nickname:nickname,
         score:draft.score
       }
-      url = "http://47.101.139.249:3000/api/players/" + rawData1["id"]["_id"]
+      url = "http://47.101.139.249/api/players/" + rawData1["id"]["_id"]
       axios.patch(url,jsons).then(response=> (
         localStorage.setItem(
           "ID",
