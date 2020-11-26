@@ -44,6 +44,7 @@ async function nicknameIsContain(url : string)
 
 function reducer(draft: typeof initialState, action: ACTIONTYPE) {
   const {nickname} = getStoredPlayer()
+  debugger
 
 
 
@@ -51,12 +52,13 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
     case 'START_SINGLEPLAYER':
       draft.gameType = 'singleplayer'
       const storageData = getStoredBoard()
-      if (storageData.board && storageData.score) {
+      
+      /*if (storageData.board && storageData.score) {
         draft.board = storageData.board
         draft.score = storageData.score
         draft.isPlaying = true
         return
-      }
+      }*/
 
       const initResult = initializeBoard(4)
       draft.board = initResult.board
@@ -67,6 +69,14 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
       url = url + nickname
 
       console.log(url)
+      console.log(111111111111111111)
+      console.log(111111111111111111)
+      console.log(111111111111111111)
+      console.log(111111111111111111)
+      console.log(111111111111111111)
+      console.log(111111111111111111)
+      console.log(111111111111111111)
+
 
       nicknameIsContain(url);
       const rawData = JSON.parse(localStorage.getItem("ID") as string)
@@ -136,6 +146,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
         )
       ));
     }
+    
 
 
       return

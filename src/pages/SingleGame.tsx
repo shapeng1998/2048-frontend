@@ -9,8 +9,10 @@ import LeaderBoard from '../components/LeaderBoard'
 
 function SingleGame() {
   const {setInitials, gameResult, startSingleplayer, resetGame} = useGame()
+  
 
   useEffect(()=> {
+    
     startSingleplayer()
     return () => setInitials()
   }, [])
