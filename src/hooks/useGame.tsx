@@ -121,12 +121,20 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
 
     if(draft.score>rawData1["id"]["score"])
     {
+
       var jsons={  
         nickname:nickname,
         score:draft.score
       }
       url = "http://47.101.139.249:3000/api/players/" + rawData1["id"]["_id"]
-      axios.patch(url,jsons);
+      axios.patch(url,jsons).then(response=> (
+        localStorage.setItem(
+          "ID",
+          JSON.stringify({
+            id: response.data
+          })
+        )
+      ));
     }
 
 
