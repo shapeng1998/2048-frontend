@@ -14,6 +14,8 @@ export type ACTIONTYPE =
   | {type: 'DECREASE_POINTS', cost: number;}
   | {type: 'TOGGLE_ISPLAYING'}
   | {type: 'OPPONENT_LOST'}
+  | {type: 'SET_EASY'}
+  | {type: 'SET_HARD'}
 
 export interface InitialStateInterFace {
   boardSize: number;
@@ -22,8 +24,11 @@ export interface InitialStateInterFace {
   isPlaying: boolean;
   previousBoard?: number[];
   gameResult: undefined | 'victory' | 'defeat' | 'draw';
+  difficulty: undefined | 'easy' | 'hard' ;
   score: number;
   scoreIncrease?: number;
+  id?: undefined;
+
   
   //Multiplayer 
   gameId?: string;
@@ -52,4 +57,6 @@ export interface GameContextInterface extends InitialStateInterFace {
   handleGameEvent: (eventType: string) => void;
   decreasePoints: (cost: number) => void
   handleOpponentLost: () => void;
+  setEasy:() => void;
+  setHard:() => void,
 }

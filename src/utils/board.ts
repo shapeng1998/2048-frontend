@@ -1,7 +1,10 @@
 import { Directions } from '../types/Directions'
 import { Animation, AnimationType } from '../types/Animations'
 
+
+
 export type BoardType = number[];
+
 
 export function newTileValue() {
   return Math.random() > 0.1 ? 2 : 4;
@@ -22,9 +25,11 @@ function newTile(board: BoardType): NewTileResult {
   }
 
   let index: number | undefined = undefined;
+  
 
   while (true) {
     index = Math.floor(Math.random() * board.length);
+
     if (board[index] === 0) {
       board[index] = newTileValue();
       break;
@@ -63,6 +68,24 @@ export function initializeBoard(boardSize: number): BoardUpdate {
       index: result.index,
     });
   }
+
+  return { board, scoreIncrease: 0, animations };
+}
+
+export function addHard(board: BoardType): BoardUpdate {
+  
+  const animations: Animation[] = [];
+
+  // Spawn two tiles at first.
+  let result = newTile(board);
+  if (result.index) {
+    animations.push({
+      type: AnimationType.NEW,
+      index: result.index,
+    });
+  }
+
+
 
   return { board, scoreIncrease: 0, animations };
 }

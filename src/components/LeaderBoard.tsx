@@ -36,7 +36,7 @@ function LeaderBoard()
     ]
 
   ));
-  console.log(req)
+  //console.log(req)
 
 
   setTimeout(() => {
@@ -47,7 +47,7 @@ function LeaderBoard()
   }, 1000)
 
 
-  console.log(rows)
+  //console.log(rows)
 
 
   return(
@@ -65,7 +65,7 @@ function LeaderBoard()
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell align="center" style={{ overflow: 'hidden', minWidth: 200 , maxWidth: 250,textOverflow: 'ellipsis'}}>{row.name}</TableCell>
+              <TableCell align="center" style={{ overflow: 'hidden', minWidth: 100 , maxWidth: 150,textOverflow: 'ellipsis'}}>{row.name}</TableCell>
               <TableCell align="center">{row.score}</TableCell>
             </TableRow>
           ))}

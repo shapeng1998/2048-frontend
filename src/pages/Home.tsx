@@ -7,9 +7,13 @@ import LeaderBoard from '../components/LeaderBoard'
 
 
 import {usePlayer} from '../hooks/usePlayer'
+import {useGame} from '../hooks/useGame'
+
+
 
 function Home() {
   const {nickname, setNickname, bestScore} = usePlayer()
+  const {difficulty} = useGame()
 
   return(
     <HomePage>
