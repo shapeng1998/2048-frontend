@@ -12,10 +12,10 @@ function SingleGame() {
   
 
   useEffect(()=> {
-    
     startSingleplayer()
     return () => setInitials()
   }, [])
+
   
   return(
     <SingleGameContainer>

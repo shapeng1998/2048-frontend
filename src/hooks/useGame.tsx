@@ -44,6 +44,7 @@ async function nicknameIsContain(url : string)
 
   ));
   console.log(688688)
+  console.log(req)
 }
 
 async function registerNickname(nickname : string,score :number)
@@ -64,6 +65,7 @@ async function registerNickname(nickname : string,score :number)
       console.log(response),
       console.log(444)
     ));
+    console.log(req)
 
 }
 
@@ -89,21 +91,16 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
       var url = "http://47.101.139.249/api/players/"
       url = url + nickname
 
-      console.log(url)
-      console.log(111111111111111111)
-      console.log(111111111111111111)
-      console.log(111111111111111111)
-      console.log(111111111111111111)
-      console.log(111111111111111111)
-      console.log(111111111111111111)
-      console.log(111111111111111111)
-
-
       nicknameIsContain(url);
+      /*
       console.log(7777)
+      sleep(10000)
+      nicknameIsContain(url);
       const rawData = JSON.parse(localStorage.getItem("ID") as string)
       console.log(rawData)
       console.log(rawData['id'])
+
+
       
 
       if(rawData['id']==null)
@@ -118,22 +115,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
 
 
       console.log(rawData2)
-
-
-      sleep(1000)
-      const initResult1 = initializeBoard(4)
-      draft.board = initResult1.board
-      draft.isPlaying = true
-      storeBoard({board: draft.board, score: draft.score})
-
-      nicknameIsContain(url);
-      if(rawData['id']==null)
-      {
-        console.log(999)
-        registerNickname(nickname as string,draft.score)
-        console.log(999)
-
-      }
+      */
 
 
       return
@@ -156,15 +138,15 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
 
 
       //数据传输
-
+      const rawData = JSON.parse(localStorage.getItem("ID") as string)
+      if(rawData['id']==null)
+      {
+        registerNickname(nickname as string,draft.score)
+        return
+      }
     
     const rawData1 = JSON.parse(localStorage.getItem("ID") as string)
-    //debugger
-    console.log(111111111111)
-    console.log(draft.score)
-    console.log(rawData1["id"])
-    console.log(rawData1["id"]["score"])
-    console.log(111111111111)
+
 
     if(draft.score>rawData1["id"]["score"])
     {
@@ -184,7 +166,6 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
       ));
     }
     
-
 
       return
 
