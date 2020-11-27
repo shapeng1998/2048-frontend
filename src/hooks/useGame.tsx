@@ -22,9 +22,8 @@ const initialState: InitialStateInterFace = {
   difficulty : "easy",
   id: undefined,
 }
-function sleep(delay: number) {
-  for(var t = Date.now(); Date.now() - t <= delay;);
-}
+const url_base = "http://47.101.139.249/api/"
+const LeadPlayBoard = "LeadPlayBoard"
 
 async function nicknameIsContain(url : string)
 {
@@ -32,19 +31,13 @@ async function nicknameIsContain(url : string)
   .then(response=> (
 
     localStorage.setItem(
-      "ID",
+      LeadPlayBoard,
       JSON.stringify({
-        
         id: response.data
       })
-    ),
-    console.log(688688),
-    console.log(response.data),
-    console.log(688688)
-
+    )
   ));
-  console.log(688688)
-  console.log(req)
+
 }
 
 async function registerNickname(nickname : string,score :number)
@@ -54,18 +47,15 @@ async function registerNickname(nickname : string,score :number)
     score:score
     }
 
-    const req =  await axios.post("http://47.101.139.249/api/players",jsons).then(response=> (
+    const req =  await axios.post(url_base+"players",jsons).then(response=> (
       localStorage.setItem(
-        "ID",
+        LeadPlayBoard,
         JSON.stringify({
           id: response.data
         })
-      ),
-      console.log(444),
-      console.log(response),
-      console.log(444)
+      )
     ));
-    console.log(req)
+
 
 }
 
@@ -76,47 +66,15 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
     case 'START_SINGLEPLAYER':
       draft.gameType = 'singleplayer'
       
-      /*if (storageData.board && storageData.score) {
-        draft.board = storageData.board
-        draft.score = storageData.score
-        draft.isPlaying = true
-        return
-      }*/
 
       const initResult = initializeBoard(4)
       draft.board = initResult.board
       draft.isPlaying = true
       storeBoard({board: draft.board, score: draft.score})
 
-      var url = "http://47.101.139.249/api/players/"
-      url = url + nickname
+      var url = url_base+"players/" + nickname
 
       nicknameIsContain(url);
-      /*
-      console.log(7777)
-      sleep(10000)
-      nicknameIsContain(url);
-      const rawData = JSON.parse(localStorage.getItem("ID") as string)
-      console.log(rawData)
-      console.log(rawData['id'])
-
-
-      
-
-      if(rawData['id']==null)
-      {
-        console.log(999)
-        registerNickname(nickname as string,draft.score)
-        console.log(999)
-
-      }
-
-      const rawData2 = JSON.parse(localStorage.getItem("ID") as string)
-
-
-      console.log(rawData2)
-      */
-
 
       return
 
@@ -128,7 +86,9 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
       draft.board = moveResult.board
       draft.score += moveResult.scoreIncrease;
       draft.scoreIncrease = moveResult.scoreIncrease;
+
       if(draft.difficulty === 'hard')  draft.board = addHard(draft.board).board
+
       const isMovePossible = movePossible(draft.board) 
       if(isMovePossible === false) {
         draft.isPlaying = false
@@ -138,24 +98,24 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
 
 
       //数据传输
-      const rawData = JSON.parse(localStorage.getItem("ID") as string)
+      const rawData = JSON.parse(localStorage.getItem(LeadPlayBoard) as string)
       if(rawData['id']==null)
       {
         registerNickname(nickname as string,draft.score)
         return
       }
     
-    const rawData1 = JSON.parse(localStorage.getItem("ID") as string)
+      const rawData1 = JSON.parse(localStorage.getItem(LeadPlayBoard) as string)
 
 
-    if(draft.score>rawData1["id"]["score"])
-    {
+      if(draft.score>rawData1["id"]["score"])
+      {
 
-      var jsons={  
-        nickname:nickname,
-        score:draft.score
+        var jsons={  
+          nickname:nickname,
+          score:draft.score
       }
-      url = "http://47.101.139.249/api/players/" + rawData1["id"]["_id"]
+      url = url_base + "players/" + rawData1["id"]["_id"]
       axios.patch(url,jsons).then(response=> (
         localStorage.setItem(
           "ID",
@@ -164,7 +124,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
           })
         )
       ));
-    }
+      }
     
 
       return
