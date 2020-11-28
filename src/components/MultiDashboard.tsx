@@ -7,11 +7,12 @@ import calcTime from '../utils/calcTime'
 
 interface MultiDashboardProps {
   emitBomb: () => void;
-  emitFreeze: () => void
+  emitFreeze: () => void;
+  startMulGame: () => void
 }
 
-function MultiDashboard ({emitBomb, emitFreeze}: MultiDashboardProps) {
-  const {score, undoMove, opponentScore, opponentBoard, endTime} = useGame()
+function MultiDashboard ({startMulGame,emitBomb, emitFreeze}: MultiDashboardProps) {
+  const {score, undoMove,opponentScore, opponentBoard, endTime} = useGame()
   const [remainingTime, setRemainingTime] = useState('')
 
   setTimeout(() => {
@@ -48,19 +49,11 @@ function MultiDashboard ({emitBomb, emitFreeze}: MultiDashboardProps) {
               }
             </OpponentBoard>
           )}
+          
           <ButtonsGroup>
-            <ShopBtnsBox>
-              <ShopBtn onClick={emitBomb} disabled={score < 250 ? true : false}>
-                <h3>Bomb</h3>
-                <p>250 points</p>
-              </ShopBtn>
-              <ShopBtn onClick={emitFreeze} disabled={score < 750 ? true : false}>
-                <h3>Freeze</h3>
-                <p>750 points</p>
-              </ShopBtn>
-            </ShopBtnsBox>
-            <LargeButton onClick={undoMove}>Undo</LargeButton>
+            <LargeButton onClick={startMulGame}>startGame</LargeButton>
           </ButtonsGroup>
+
         </SecondSection>
       </DashboardContainer>
     );
@@ -123,35 +116,6 @@ const ButtonsGroup = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
-const ShopBtnsBox = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  
-`
-
-const ShopBtn = styled.button`
-  font-size: 1rem;
-  margin: .5em 0;
-  padding: .75em 0;
-  width: 45%;
-  background: #eee4da;
-  color: #776e65;
-  border-radius: .5em;
-  text-align: center;
-
-  h3 {
-    margin: 0
-  }
-
-  p {
-    margin: 0
-  }
-  &[disabled] {
-    filter: grayscale(1);
-  }
 `
 
 const LargeButton = styled.button`

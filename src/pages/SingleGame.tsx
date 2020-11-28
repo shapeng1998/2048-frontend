@@ -37,8 +37,6 @@ function SingleGame() {
 
 export default SingleGame
 
-
-
 const LeaderboardHeading = styled.div`
   font-size: 3rem;
   margin: 0 0 .5rem 0;

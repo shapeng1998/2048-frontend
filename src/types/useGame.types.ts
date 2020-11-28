@@ -16,6 +16,8 @@ export type ACTIONTYPE =
   | {type: 'OPPONENT_LOST'}
   | {type: 'SET_EASY'}
   | {type: 'SET_HARD'}
+  | {type: 'GAME_READY'}
+  | {type: 'START_MUL_GAME'}
 
 export interface InitialStateInterFace {
   boardSize: number;
@@ -59,4 +61,6 @@ export interface GameContextInterface extends InitialStateInterFace {
   handleOpponentLost: () => void;
   setEasy:() => void;
   setHard:() => void,
+  startGameReady:() => void,
+  startMulGame:()=> void
 }

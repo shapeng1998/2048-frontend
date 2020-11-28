@@ -7,6 +7,7 @@ import MultiGame from './pages/MultiGame';
 import {GameProvider} from './hooks/useGame'
 import {PlayerProvider} from './hooks/usePlayer'
 import Layout from './components/Layout';
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
 function App() {
   return (
@@ -22,7 +23,10 @@ function App() {
                 <SingleGame />
               </Route>
               <Route path="/multiplayer" exact>
-                <MultiGame />
+
+ <              SnackbarProvider maxSnack={3}>
+                  <MultiGame />
+                </SnackbarProvider>
               </Route>
             </Layout>
           </GameProvider>

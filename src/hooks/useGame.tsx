@@ -161,6 +161,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
         draft.opponentScore = undefined
       }
       draft.gameType = undefined
+      debugger
       return
       
     case 'START_MULTIPLAYER':
@@ -172,7 +173,24 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
       draft.previousBoard = undefined
       draft.score = 0
       draft.isPlaying = true
+      window.alert("游戏已开始，加油！")
+
+      
       return
+
+      case 'GAME_READY':
+        draft.gameType = 'multiplayer'
+        draft.board = initializeBoard(4).board
+
+
+        draft.previousBoard = undefined
+        draft.score = 0
+        draft.isPlaying = true
+        draft.opponentBoard = new Array(4 ** 2).fill(0);
+        draft.opponentScore = 0
+        
+        return
+
 
     case 'UPDATE_MULTIPLAYER':
       draft.opponentBoard = action.data.opponentBoard
@@ -219,6 +237,10 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
 
     case 'SET_HARD':
       draft.difficulty = 'hard'
+      
+      return
+    case 'START_MUL_GAME':
+      
       
       return
   }
@@ -268,6 +290,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
         makeMove: (direction) => dispatch({type: 'MAKE_MOVE', direction }),
         undoMove: () => dispatch({type: 'UNDO' }),
         resetGame: () => dispatch({type: 'RESET' }),
+        startMulGame:()=> dispatch({type: 'START_MUL_GAME' }),
 
         setEasy:() => dispatch({type: 'SET_EASY' }),
         setHard:() => dispatch({type: 'SET_HARD' }),
@@ -279,6 +302,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
         handleGameEvent,
         decreasePoints: (cost) => dispatch({type: 'DECREASE_POINTS', cost }),
         handleOpponentLost: () => dispatch({type: 'OPPONENT_LOST'}),
+        startGameReady:()=>dispatch({type: 'GAME_READY'}),
       }}
     >
       {children}
