@@ -11,6 +11,10 @@ import Divider from '@material-ui/core/Divider';
 import axios from 'axios'
 import calcTime from '../utils/calcTime'
 
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 
 function createData(name: string, score: string) {
   return {name, score};
@@ -24,8 +28,10 @@ function LeaderBoard()
 {
   const [remainingTime, setRemainingTime] = useState('')
   
+  const url = process.env.REACT_APP_API_URL;
+  // console.log(process.env.REACT_APP_API_URL);
 
-  const req = axios.get("http://47.101.139.249:3000/api/players/top5")
+  const req = axios.get(`${url}/players/top5`)
   .then(response=> (
     rows=[
       createData(response.data[0]['nickname'],response.data[0]['score']),

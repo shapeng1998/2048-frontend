@@ -22,5 +22,4 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm i
-      - run: CI=false
-      - run: CI= npm run build
+      - run: CI=false REACT_APP_API_URL=http://47.101.139.249:3000/api REACT_APP_SOCKET_URL=47.101.139.249:3000 npm run build

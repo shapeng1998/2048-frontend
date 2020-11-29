@@ -15,6 +15,10 @@ import GameResult from '../components/GameResult';
 import {startMultiplayerI, updateMultiplayerI} from '../types/useGame.types'
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
+import dotenv from 'dotenv';
+
+dotenv.config()
+
 
 const MultiGame: React.FC<RouteComponentProps> = () => {
   const { board, score, setInitials,startGameReady, startMultiplayer, updateMultiplayer, resultMultiplayer, gameId, gameResult, handleGameEvent, decreasePoints, handleOpponentLost} = useGame()
@@ -22,7 +26,7 @@ const MultiGame: React.FC<RouteComponentProps> = () => {
   const socket = useRef({} as SocketIOClient.Socket)
   
   //const SERVER_ENDPOINT: string | undefined = process.env.REACT_APP_SERVER_ENDPOINT
-  const SERVER_ENDPOINT = '47.101.139.249:3000';
+  const SERVER_ENDPOINT: string | undefined = process.env.REACT_APP_SOCKET_URL;
   useEffect(() => {
     if(!SERVER_ENDPOINT) return
     socket.current = io.connect(SERVER_ENDPOINT)

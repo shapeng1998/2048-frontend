@@ -7,6 +7,10 @@ import {InitialStateInterFace, GameContextInterface, ACTIONTYPE} from  '../types
 import axios from 'axios'
 import { getStoredPlayer, storePlayer } from '../utils/localStorage';
 
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const NANE_AND_ID = '2048.vs_board';
 
 const GameContext = createContext({} as GameContextInterface);
@@ -22,7 +26,7 @@ const initialState: InitialStateInterFace = {
   difficulty : "easy",
   id: undefined,
 }
-const url_base = "http://47.101.139.249:3000/api/"
+const url_base = process.env.REACT_APP_API_URL;
 const LeadPlayBoard = "LeadPlayBoard"
 
 async function nicknameIsContain(url : string)
