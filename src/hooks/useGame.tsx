@@ -22,7 +22,7 @@ const initialState: InitialStateInterFace = {
   difficulty : "easy",
   id: undefined,
 }
-const url_base = "http://47.101.139.249/api/"
+const url_base = "http://47.101.139.249:3000/api/"
 const LeadPlayBoard = "LeadPlayBoard"
 
 async function nicknameIsContain(url : string)
