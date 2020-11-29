@@ -37,15 +37,15 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     })
   }
 
-  useEffect(() => {
-    const {nickname, bestScore} = getStoredPlayer()
-    if (nickname) {
-      setNickname(nickname)
-    }
-    if(bestScore) {
-      setBestScore(bestScore)
-    }
-  }, [])
+  // useEffect(() => {
+  //   const {nickname, bestScore} = getStoredPlayer()
+  //   if (nickname) {
+  //     setNickname(nickname)
+  //   }
+  //   if(bestScore) {
+  //     setBestScore(bestScore)
+  //   }
+  // }, [])
 
   useEffect(() => {
     storePlayer({nickname: player.nickname, bestScore: player.bestScore})
