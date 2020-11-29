@@ -22,7 +22,7 @@ const MultiGame: React.FC<RouteComponentProps> = () => {
   const socket = useRef({} as SocketIOClient.Socket)
   
   //const SERVER_ENDPOINT: string | undefined = process.env.REACT_APP_SERVER_ENDPOINT
-  const SERVER_ENDPOINT="127.0.0.1:4000"
+  const SERVER_ENDPOINT = '47.101.139.249';
   useEffect(() => {
     if(!SERVER_ENDPOINT) return
     socket.current = io.connect(SERVER_ENDPOINT)
