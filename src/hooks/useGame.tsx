@@ -76,7 +76,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
       draft.isPlaying = true
       storeBoard({board: draft.board, score: draft.score})
 
-      var url = url_base+"players/" + nickname
+      var url = url_base+"/players/" + nickname
 
       nicknameIsContain(url);
 
