@@ -51,7 +51,7 @@ async function registerNickname(nickname : string,score :number)
     score:score
     }
 
-    const req =  await axios.post(url_base+"players",jsons).then(response=> (
+    const req =  await axios.post(url_base+"/players",jsons).then(response=> (
       localStorage.setItem(
         LeadPlayBoard,
         JSON.stringify({
@@ -119,7 +119,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
           nickname:nickname,
           score:draft.score
       }
-      url = url_base + "players/" + rawData1["id"]["_id"]
+      url = url_base + "/players/" + rawData1["id"]["_id"]
       axios.patch(url,jsons).then(response=> (
         localStorage.setItem(
           "ID",
