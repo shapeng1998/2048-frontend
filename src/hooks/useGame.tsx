@@ -25,6 +25,7 @@ const initialState: InitialStateInterFace = {
   score: 0,
   difficulty : "easy",
   id: undefined,
+  animations: []
 }
 const url_base = process.env.REACT_APP_API_URL;
 const LeadPlayBoard = "LeadPlayBoard"
@@ -90,6 +91,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
       draft.board = moveResult.board
       draft.score += moveResult.scoreIncrease;
       draft.scoreIncrease = moveResult.scoreIncrease;
+      draft.animations = moveResult.animations;
 
       if(draft.difficulty === 'hard')  draft.board = addHard(draft.board).board
 
@@ -256,7 +258,7 @@ interface GameProviderProps {
 
 export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-  const {gameType, boardSize, board, gameResult, previousBoard, score, scoreIncrease, isPlaying, gameId, endTime, opponentBoard, opponentScore ,difficulty,id} = state
+  const {gameType, boardSize, board, gameResult, previousBoard, score, animations, scoreIncrease, isPlaying, gameId, endTime, opponentBoard, opponentScore ,difficulty,id} = state
 
 
   const handleGameEvent = (eventType: string) => {
@@ -281,6 +283,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
         board,
         previousBoard,
         score,
+        animations,
         gameResult,
         scoreIncrease,
         isPlaying,

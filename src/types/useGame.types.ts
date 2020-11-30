@@ -1,5 +1,5 @@
 import {Directions} from './Directions'
-
+import {Animation} from './Animations'
 export type ACTIONTYPE = 
   | {type: 'START_SINGLEPLAYER';} 
   | {type: 'MAKE_MOVE'; direction: Directions;}
@@ -30,7 +30,7 @@ export interface InitialStateInterFace {
   score: number;
   scoreIncrease?: number;
   id?: undefined;
-
+  animations?: Animation[];
   
   //Multiplayer 
   gameId?: string;

@@ -1,23 +1,40 @@
 import React from 'react'
 import styled from '@emotion/styled';
-import { css, SerializedStyles } from '@emotion/core'
-
+import { css, SerializedStyles, keyframes } from '@emotion/core'
+import {Animation, AnimationType} from '../types/Animations'
 
 interface TileInterface {
   value: number;
   size?: string;
+  animation?: Animation;
 }
 
-function Tile({value, size}: TileInterface) {
+function Tile({value, size, animation}: TileInterface) {
   const stringValue = value.toString()
+  let ani = css``;
+  if (animation) switch(animation.type) {
+    case AnimationType.MERGE:
+      break;
+    case AnimationType.NEW:
+      ani = newTile;
+      console.log('new tile!');
+      break;
+    case AnimationType.MOVE:
+      break;
+  }
+  let AnimationWrap = styled.span`
+    ${ani}
+  `;
   return(
-    <Cell size={size}>
-      {value !== 0 && (
-        <CellInner value={stringValue}>
-          {value}
-        </CellInner>
-      )}
-    </Cell>
+    <AnimationWrap>
+      <Cell size={size}>
+        {value !== 0 && (
+          <CellInner value={stringValue}>
+            {value}
+          </CellInner>
+        )}
+      </Cell>
+    </AnimationWrap>
   )
 }
 
@@ -120,7 +137,23 @@ const tilesColors: {[key: string]: SerializedStyles} = {
   `
 }
 
-  
+const newTileKeyframes = keyframes`
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+`
+
+const newTile = css`
+  animation-duration: 0.2s;
+  animation-name: ${newTileKeyframes};
+  aniamtino-fill-mode: forwards;
+  animation-deay:0.15s;
+  transform: scale(1);
+`
   
   
 

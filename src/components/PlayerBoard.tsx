@@ -8,7 +8,7 @@ import { Point } from '../types/Models';
 
 
 function PlayerBoard() {
-  const {board, makeMove} = useGame()
+  const {board, makeMove, animations} = useGame()
   const [allowMove, setAllowMove] = useState(false)
   const startPointerLocation = useRef<Point>();
   const currentPointerLocation = useRef<Point>();
@@ -106,7 +106,13 @@ function PlayerBoard() {
     >
       <Board>
         {
-          board.map((value: number, idx: number) => <Tile key={idx} value={value}/>)
+          board.map((value: number, idx: number) => {
+
+            if (animations) 
+              var animation = animations.find((a) => a.index == idx);
+
+            return (<Tile key={idx} value={value} animation={animation}/>);
+          })
         }
       </Board>
     </BoardContainer>
