@@ -103,7 +103,7 @@ function reducer(draft: typeof initialState, action: ACTIONTYPE) {
 
       //数据传输
       const rawData = JSON.parse(localStorage.getItem(LeadPlayBoard) as string)
-      if(rawData['id']==null)
+      if(rawData==null)
       {
         registerNickname(nickname as string,draft.score)
         return
