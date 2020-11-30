@@ -28,6 +28,6 @@ npm install
 npm start
 ```
 
-## Related Project
+## Related projects
 
 - [2048-backend](https://github.com/shapeng1998/2048-backend)
