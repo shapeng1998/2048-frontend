@@ -1,13 +1,32 @@
 # 2048-frontend
 
-部分代码参考自 https://github.com/pietrushka/2048-multiplayer-client
-并在此基础上添加了部分功能
+![build](https://github.com/shapeng1998/2048-frontend/workflows/build/badge.svg)
 
-1. 积分榜
-2. easy 和 hard 两个模式的选择
-3. 多人模式聊天框
-4. 多人模式游戏准备阶段
+> A simple 2048 game frontend using [React](https://www.expressjs.com), [Typescript](https://www.mongodb.com/) and [Socket.IO](https://socket.io/). Part of the logic is referenced from project [2048-multiplayer-client](https://github.com/pietrushka/2048-multiplayer-client).
 
-使用步骤
-1.npm install
-2.npm start
+## Additional features
+
+1. League table
+2. Easy and hard mode
+3. Multi-player chatting
+4. Preparation part of multi-player phase
+
+## Dev setup
+
+```bash
+# clone the project
+git clone https://github.com/shapeng1998/2048-frontend
+
+# enter the project directory
+cd 2048-frontend
+
+# install dependency
+npm install
+
+# develop
+npm start
+```
+
+## Related Project
+
+- [2048-backend](https://github.com/shapeng1998/2048-backend)
