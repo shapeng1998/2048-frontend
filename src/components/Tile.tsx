@@ -17,7 +17,7 @@ function Tile({value, size, animation}: TileInterface) {
       break;
     case AnimationType.NEW:
       ani = newTile;
-      console.log('new tile!');
+      // console.log('new tile!');
       break;
     case AnimationType.MOVE:
       break;
